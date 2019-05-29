@@ -1,0 +1,26 @@
+server:
+  port: 8080
+dubbo:
+  application:
+    name: back
+  registry:
+    address: zookeeper://192.168.114.128:2181
+  consumer:
+    #容错机制
+    retries: 1
+    timeout: 5000
+    check: false
+#配置fdfs
+fdfs:
+  tracker-list:
+    - 192.168.114.128:22122
+  connect-timeout: 10000
+  so-timeout: 10000
+  thumb-image:
+    height: 100
+    width: 100
+  pool:
+    jmx-enabled: false
+#图片服务器的地址
+img:
+  server: http://192.168.114.128

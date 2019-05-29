@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <base th:href="${#request.getContextPath() + '/'}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
+    <!-- Reset Stylesheet -->
+    <link rel="stylesheet" href="resources/css/reset.css" type="text/css"
+          media="screen" />
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="resources/css/style.css" type="text/css"
+          media="screen" />
+    <link rel="stylesheet" href="resources/css/invalid.css" type="text/css"
+          media="screen" />
+
+    <!--                       Javascripts                       -->
+    <!-- jQuery -->
+    <script type="text/javascript"
+            src="resources/scripts/jquery-1.8.3.min.js"></script>
+    <!-- jQuery Configuration -->
+    <!--<script type="text/javascript"
+            src="resources/scripts/simpla.jquery.configuration.js"></script>-->
+
+    <!-- 依赖webuploader插件 -->
+    <script type="text/javascript"
+            src="resources/widget/webuploader/webuploader.min.js"></script>
+    <link rel="stylesheet" href="resources/widget/webuploader/webuploader.css" type="text/css"
+          media="screen" />
+
+    <script>
+        $(function () {
+            // 初始化Web Uploader
+            var uploader = WebUploader.create({
+
+                // 选完文件后，是否自动上传。
+                auto: true,
+
+                swf: '/resources/widget/webuploader/Uploader.swf',
+
+                // 文件接收服务端。
+                server: '/res/uploadImg',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#filePicker',
+
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                }
+            });
+
+            // 当有文件添加进来的时候
+            uploader.on( 'fileQueued', function( file ) {
+
+                // 创建缩略图
+                // 如果为非图片文件，可以不用调用此方法。
+                // thumbnailWidth x thumbnailHeight 为 100 x 100
+                uploader.makeThumb( file, function( error, src ) {
+                    //创建了缩略图
+                    if ( src ) {
+                        alert("素略图创建 成功了");
+                        //素略图创建成功
+                        var html = "<img style='width: 100px;height: 100px;margin-right: 10px' src='"+src+"'/>";
+                        $("#imgs_div").append(html);
+                    }else {
+                        alert("缩略去创建失败了");
+                    }
+
+                }, 100, 100 );
+            });
+
+            //如果成功的上传图片
+            uploader.on( 'uploadSuccess', function(file,response) {
+                //alert(JSON.stringify(response));//将JSON对象
+                if (response.code=="0000"){
+                    //上传成功了
+                    var input = "<input type='hidden' name='gimageList' value='"+response.filepath+"'/>";
+                    $("#imgs").append(input);
+                } else {
+                    alert(file.name+"图片上传失败了");
+                }
+
+            });
+        })
+        
+        function delAllGimage() {
+           /* $(".del_all").val().remove();*/
+            $("[name|='gimageList']").remove();
+            $("img").remove();
+            alert("删除所有成功了");
+            //location.reload();s
+        }
+
+        function delOne(obj) {
+            //$("[name|='gimageList']").remove(obj);
+            obj.remove();
+            alert("移除一张照片了");
+        }
+
+    </script>
+
+</head>
+<body>
+<div id="main-content">
+    <div class="content-box">
+        <div class="content-box-content">
+            <div class="tab-content default-tab" id="tab2">
+                <form action="/goods/updateGoodsById" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+                        <input type="hidden" name="id" th:value="${goods.id}">
+                        <p>
+                            <label>商品名称</label> <input
+                                class="text-input medium-input datepicker" type="text"
+                                name="gname" th:value="${goods.gname}"/>
+                        </p>
+                        <p>
+                            <label>商品图片</label>
+                           <!-- <input
+                                class="text-input medium-input datepicker" type="file"
+                                name="gimage" />-->
+                            <div id="imgs">
+                                <input type="hidden" name="gimageList" th:each="imagsrc:${#strings.listSplit(goods.gimages,'|')}" th:value="${imagsrc}"/>
+                            </div>
+                            <div id="imgs_div" style="padding: 10px;width: 600px; height: 200px; border: 1px solid #ff0000;
+                             margin-bottom: 10px;">
+                                <div>
+                                    <img style='width: 100px;height: 100px;margin-right: 10px'
+                                         th:each="imag:${#strings.listSplit(goods.gimages,'|')}" th:src="|${imgPath}/${imag}|"
+                                    />/
+                                    <span onclick="delOne(this)">移除</span>
+                                </div>
+
+                            </div>
+
+                            <div id="filePicker">选择图片</div>
+                            <div onclick="delAllGimage()">全部清空</div>
+                        </p>
+                        <p>
+                            <label>商品价格</label> <input
+                                class="text-input medium-input datepicker" type="text"
+                                name="gprice" th:value="${goods.gprice}"/>
+                        </p>
+                        <p>
+                            <label>商品库存</label> <input
+                                class="text-input medium-input datepicker" type="text"
+                                name="gsave" th:value="${goods.gsave}"/>
+                        </p>
+
+                        <p>
+                            <label>商品描述</label>
+                            <textarea class="text-input textarea wysiwyg" id="textarea"
+                                      name="ginfo" cols="79" rows="15" th:text="${goods.ginfo}"></textarea>
+                        </p>
+                        <p>
+                            <input class="mybutton" type="submit" value="修改提交" />
+                        </p>
+                    </fieldset>
+                    <div class="clear"></div>
+                    <!-- End .clear -->
+                </form>
+            </div>
+            <!-- End #tab2 -->
+        </div>
+        <!-- End .content-box-content -->
+    </div>
+</div>
+<!-- End #main-content -->
+</body>
+</html>
