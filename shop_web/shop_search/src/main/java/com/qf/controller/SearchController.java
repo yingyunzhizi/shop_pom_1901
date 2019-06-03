@@ -33,7 +33,7 @@ public class SearchController {
         Page<Goods> goodsPage = searchService.queryByKeyWord(keyWord,page);
         model.addAttribute("page",goodsPage);
         //model.addAttribute("url","/search/searchByKeyWord?keyWord="+keyWord+"&");
-        model.addAttribute("url","/search/searchByKeyWord?keyWord="+keyWord+"&");
+        model.addAttribute("url","/search/searchByKeyWord?keyWord="+keyWord);
         //model.addAttribute("url","/search/searchByKeyWord/keyWord?");
         System.out.println(goodsPage);
         return "searchlist";

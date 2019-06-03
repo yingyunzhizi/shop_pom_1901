@@ -70,8 +70,32 @@
                 } else {
                     alert(file.name+"图片上传失败了");
                 }
-
             });
+            var isUser = false;
+            $("#username").blur(function () {
+                var username = $("#username").val();
+                if (username==""){
+                    $("#span1").html("不能为空");
+                    isUser = false;
+                    return;
+                }
+                $.get("/user/checkByUsername?username="+username,"",function(data) {
+                    $("#span1").html(data);
+                    var value = $("#span1").html();
+                    if (value != "√"){
+                        debugger
+                        isUser = false;
+                    }else {
+                        isUser = true;
+                    }
+                });
+            });
+            //提交的时候校验
+            $("#btn").submit(function () {
+                /*用户名标签自动触发blur事件*/
+                $("#username").trigger("blur");
+                return isUser;
+            })
         })
 
 
@@ -88,10 +112,13 @@
             <h3>用户注册</h3>
         </div>
         <div class="form-bd">
-            <form action="/user/registerUser" method="POST">
+            <form action="/user/registerUser" method="POST" id="btn">
                 <dl>
                     <dt>用户名</dt>
-                    <dd><input type="text" name="username" class="text" /></dd>
+                    <dd>
+                        <input type="text" name="username" class="text" id="username"/><br>
+                        &nbsp;&nbsp;&nbsp;<span id="span1" style="color: red"></span>
+                    </dd>
                 </dl>
                 <dl>
                     <dt>密码</dt>
@@ -123,7 +150,11 @@
                 </dl>-->
                 <dl>
                     <dt>&nbsp;</dt>
-                    <dd><input type="submit" value="立即注册" class="submit"/> <input type= "checkbox" checked="checked"/>阅读并同意<a href="" class="forget">服务协议</a></dd>
+                    <dd>
+                        <input type= "checkbox" checked="checked"/>阅读并同意<a href="" class="forget">服务协议</a><br>
+                        <input type="submit" value="立即注册" class="submit"/><br>
+                        <span id="span2" style="color: red"></span>
+                    </dd>  
                 </dl>
             </form>
 

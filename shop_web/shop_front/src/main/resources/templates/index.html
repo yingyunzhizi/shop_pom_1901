@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <base th:href="${#request.getContextPath() + '/'}"/>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
@@ -21,11 +22,26 @@
         <div class="shop_hd_topNav_all">
             <!-- Header TopNav Left -->
             <div class="shop_hd_topNav_all_left">
-                <p>您好，欢迎来到<b><a href="/">ShopCZ商城</a></b>[<a href="/front/login">登录</a>][<a href="/front/register">注册</a>]</p>
+                <shiro:guest>
+                    <p>您好，欢迎来到<b><a href="/">ShopCZ商城</a></b>[<a href="/front/login">登录</a>][<a href="/front/register">注册</a>]</p>
+                </shiro:guest>
+                <shiro:user>
+                    <ul class="topNav_quick_menu">
+                        <li>
+                            <div class="topNav_menu">
+                                <a href="#" class="topNavHover">欢迎<shiro:principal property="username"/>,赶紧买买买把<i></i></a>
+                                <div class="topNav_menu_bd" style="display:none;" >
+                                    <ul>
+                                        <li><a title="个人信息" target="_top" href="#">个人信息</a></li>
+                                        <li><a title="切换账户" target="_top" href="#">切换账户</a></li>
+                                        <li><a title="退出" target="_top" href="/logout">退出</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </shiro:user>
             </div>
-            <!-- Header TopNav Left End -->
-
-            <!-- Header TopNav Right -->
             <div class="shop_hd_topNav_all_right">
                 <ul class="topNav_quick_menu">
 
