@@ -611,13 +611,19 @@
                 </li>
                 <li style="padding:20px 0;">
                     <label>&nbsp;</label>
-                    <span><a href="" class="goods_sub goods_sub_gou">加入购物车</a></span>
+                    <span><a onclick="addCart()" class="goods_sub goods_sub_gou">加入购物车</a></span>
                 </li>
             </ul>
         </div>
     </div>
     <!-- 商品展示 End -->
-
+    <script type="text/javascript">
+        function addCart() {
+            var gid = ${goods.id};
+            var gnumber = $("#good_nums").val();
+            location.href = "http://localhost:8085/cart/addCart?gid="+gid+"&gnumber="+gnumber;
+        }
+    </script>
     <div class="clear mt15"></div>
     <!-- Goods Left -->
     <div class="shop_bd_list_left clearfix">

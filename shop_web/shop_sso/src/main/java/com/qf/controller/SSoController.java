@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.mail.MessagingException;
@@ -216,8 +217,13 @@ public class SSoController {
      */
     @RequestMapping("/isLogin")
     @ResponseBody
-    public String isLogin(@CookieValue(name = "login_token", required = false) String loginToken, String callback) {
+    public String isLogin(@CookieValue(name = "login_token", required = false)
+                                      String loginToken,
+                          @RequestParam(name = "loginToken",required = false)
+                                  String loginToken2,
+                          String callback) {
 
+        loginToken = loginToken != null?loginToken:loginToken2;
         //开始认证当前用户是否登录
         String result = null;
         if (loginToken != null) {
