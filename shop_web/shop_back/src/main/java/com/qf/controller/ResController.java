@@ -26,12 +26,13 @@ public class ResController {
 
     /**
      * 上传图片,可能是多张
+     *
      * @param file
      * @return
      */
     @RequestMapping(value = "/uploadImg")
     @ResponseBody
-    public Map<String, String> uploadImg(MultipartFile file){
+    public Map<String, String> uploadImg(MultipartFile file) {
 
         //获取上传图片名称
         String filename = file.getOriginalFilename();
@@ -40,8 +41,8 @@ public class ResController {
         //截取后缀
         int index = filename.lastIndexOf(".");
         //因为上传服务器的的后缀不需要点了,所以加一
-        String houzhui = filename.substring(index+1);
-        Map<String,String> map = new HashMap<>();
+        String houzhui = filename.substring(index + 1);
+        Map<String, String> map = new HashMap<>();
 
         //上传图片到Ffds的服务器
         try {
@@ -50,13 +51,13 @@ public class ResController {
                     flength,
                     houzhui,
                     null);
-            map.put("code","0000");
-            map.put("filepath",storePath.getFullPath());
+            map.put("code", "0000");
+            map.put("filepath", storePath.getFullPath());
             return map;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        map.put("code","0001");
+        map.put("code", "0001");
         return map;
         /*//获取上传路径
         String path = ResController.class.getResource("/").getPath() + "static/file";
@@ -69,6 +70,6 @@ public class ResController {
         }  catch (IOException e) {
             e.printStackTrace();
         }*/
-}
+    }
 
 }

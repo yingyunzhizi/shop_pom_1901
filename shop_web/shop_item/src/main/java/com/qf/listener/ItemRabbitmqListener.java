@@ -26,7 +26,7 @@ public class ItemRabbitmqListener {
     private Configuration configuration;
 
     @RabbitListener(queues = "item_queue")
-    public void goodsMsgHandler(Goods goods){
+    public void goodsMsgHandler(Goods goods) {
 
         //静态页面的输出路径:必须可以让外界访问到
         String sPath = ItemController.class.getResource("/static/html/").getPath() + goods.getId() + ".html";
@@ -38,11 +38,11 @@ public class ItemRabbitmqListener {
             //Goods goods = goodsService.getGoodsById(gid);
             String[] stringImages = goods.getGimages().split("\\|");
             Map map = new HashMap();
-            map.put("goods",goods);
-            map.put("stringImages",stringImages);
+            map.put("goods", goods);
+            map.put("stringImages", stringImages);
 
             //生成详情页
-            template.process(map,fileWriter);
+            template.process(map, fileWriter);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {

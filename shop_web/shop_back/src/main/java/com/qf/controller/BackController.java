@@ -15,11 +15,12 @@ public class BackController {
 
     /**
      * 让每个请求调到对应的页面去
+     *
      * @param topage
      * @return
      */
     @RequestMapping("/{topage}")
-    public String toPage(@PathVariable("topage") String topage){
+    public String toPage(@PathVariable("topage") String topage) {
         return topage;
     }
 }

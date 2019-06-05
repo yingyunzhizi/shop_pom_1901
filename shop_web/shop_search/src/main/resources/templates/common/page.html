@@ -6,27 +6,27 @@
 
 
     <div id="test1"></div>
-<script>
-    // 初始化的分页导航条
-    layui.use('laypage', function(){
-        var laypage = layui.laypage;
-        laypage.render({
-            elem: 'test1' // 显示分页导航条元素的id
-            ,count: "[[${page.totalCount}]]" // 总条数
-            ,limit:"[[${page.pageSize}]]" // 每页显示5条
-            ,limits:[20,10,5,2]
-            ,curr:"[[${page.currentPage}]]" // 当前页
-            ,layout: ['prev', 'page', 'next', 'limit','count']// 布局
-            ,jump: function(obj, first){ //
-                //obj:分页对象
-                console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
-                console.log(obj.limit); //得到每页显示的条数
-                //首次不执行
-                if(!first){
-                    location.href="[[${url}]]&currentPage="+obj.curr+"&pageSize="+obj.limit;
+    <script>
+        // 初始化的分页导航条
+        layui.use('laypage', function () {
+            var laypage = layui.laypage;
+            laypage.render({
+                elem: 'test1' // 显示分页导航条元素的id
+                , count: "[[${page.totalCount}]]" // 总条数
+                , limit: "[[${page.pageSize}]]" // 每页显示5条
+                , limits: [20, 10, 5, 2]
+                , curr: "[[${page.currentPage}]]" // 当前页
+                , layout: ['prev', 'page', 'next', 'limit', 'count']// 布局
+                , jump: function (obj, first) { //
+                    //obj:分页对象
+                    console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                    console.log(obj.limit); //得到每页显示的条数
+                    //首次不执行
+                    if (!first) {
+                        location.href = "[[${url}]]&currentPage=" + obj.curr + "&pageSize=" + obj.limit;
+                    }
                 }
-            }
+            });
         });
-    });
-</script>
-    </div>
+    </script>
+</div>

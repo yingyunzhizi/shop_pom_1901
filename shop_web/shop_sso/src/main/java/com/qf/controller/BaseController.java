@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BaseController {
 
     @RequestMapping("/{topage}")
-    public String toPage(@PathVariable("topage") String topage){
+    public String toPage(@PathVariable("topage") String topage) {
         return topage;
     }
 }

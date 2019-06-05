@@ -7,12 +7,12 @@
     <!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
     <!-- Reset Stylesheet -->
     <link rel="stylesheet" href="resources/css/reset.css" type="text/css"
-          media="screen" />
+          media="screen"/>
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="resources/css/style.css" type="text/css"
-          media="screen" />
+          media="screen"/>
     <link rel="stylesheet" href="resources/css/invalid.css" type="text/css"
-          media="screen" />
+          media="screen"/>
 
     <!--                       Javascripts                       -->
     <!-- jQuery -->
@@ -48,7 +48,7 @@
                 <table>
                     <thead>
                     <tr>
-                        <th><input class="check-all" type="checkbox" /></th>
+                        <th><input class="check-all" type="checkbox"/></th>
                         <th>商品id</th>
                         <th>商品名称</th>
                         <th>商品图片</th>
@@ -60,10 +60,11 @@
                     <!--TODO page.list-->
                     <tbody>
                     <tr th:each="good :${page.list}">
-                        <td><input type="checkbox" /></td>
+                        <td><input type="checkbox"/></td>
                         <td th:text="${good.id}">Lorem ipsum dolor</td>
                         <td th:text="${good.gname}"><a href="#" title="title">Sit amet</a></td>
-                        <td><img  style="width: 80px;height: 50px" th:src="|${imgPath}/${#strings.listSplit(good.gimages,'|')[0]}|"></td>
+                        <td><img style="width: 80px;height: 50px"
+                                 th:src="|${imgPath}/${#strings.listSplit(good.gimages,'|')[0]}|"></td>
                         <td th:text="${good.gprice}">Donec tortor diam</td>
                         <td th:text="${good.ginfo}"></td>
                         <td>
@@ -98,7 +99,7 @@
                     </tfoot>
                 </table>
                 <!--引入分页栏-->
-                <div th:include="common/page.html :: page_div" ></div>
+                <div th:include="common/page.html :: page_div"></div>
             </div>
         </div>
         <!-- End .content-box-content -->

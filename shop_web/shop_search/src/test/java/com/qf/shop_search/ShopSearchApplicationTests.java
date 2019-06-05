@@ -24,24 +24,23 @@ public class ShopSearchApplicationTests {
 
     @Test
     public void test1() throws IOException, SolrServerException {
-        for(int i=0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
             SolrInputDocument sd = new SolrInputDocument();
-            sd.addField("id",i+1);
-            if (i==5){
-                sd.addField("gname","传音手机,传音,传音"+i);
-            }else {
-                sd.addField("gname","传音手机"+i);
+            sd.addField("id", i + 1);
+            if (i == 5) {
+                sd.addField("gname", "传音手机,传音,传音" + i);
+            } else {
+                sd.addField("gname", "传音手机" + i);
             }
-            sd.addField("ginfo","战斗机");
-            sd.addField("gprice","199.9"+i);
-            sd.addField("gsave","56"+i);
-            sd.addField("gimages","http://www.baidu.com");
+            sd.addField("ginfo", "战斗机");
+            sd.addField("gprice", "199.9" + i);
+            sd.addField("gsave", "56" + i);
+            sd.addField("gimages", "http://www.baidu.com");
             solrClient.add(sd);
             solrClient.commit();
 
         }
     }
-
 
 
 }

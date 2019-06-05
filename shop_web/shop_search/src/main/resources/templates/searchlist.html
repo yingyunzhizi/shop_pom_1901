@@ -2,19 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <base th:href="${#request.getContextPath() + '/'}"/>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <title>商品列表页</title>
-    <link rel="stylesheet" href="css/base.css" type="text/css" />
-    <link rel="stylesheet" href="css/shop_common.css" type="text/css" />
-    <link rel="stylesheet" href="css/shop_header.css" type="text/css" />
-    <link rel="stylesheet" href="css/shop_list.css" type="text/css" />
-    <script type="text/javascript" src="js/jquery.js" ></script>
-    <script type="text/javascript" src="js/topNav.js" ></script>
-    <script type="text/javascript" src="js/shop_list.js" ></script>
+    <link rel="stylesheet" href="css/base.css" type="text/css"/>
+    <link rel="stylesheet" href="css/shop_common.css" type="text/css"/>
+    <link rel="stylesheet" href="css/shop_header.css" type="text/css"/>
+    <link rel="stylesheet" href="css/shop_list.css" type="text/css"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/topNav.js"></script>
+    <script type="text/javascript" src="js/shop_list.js"></script>
     <!--layui的css和all的js-->
     <link rel="stylesheet" href="resources/lib/layui-v2.4.5/layui-v2.4.5/layui/css/layui.css"/>
     <script type="text/javascript"
             src="resources/lib/layui-v2.4.5/layui-v2.4.5/layui/layui.all.js"></script>
+    <script type="text/javascript" src="http://localhost:8084/js/login.js"></script>
 </head>
 <body>
 <!-- Header  -wll-2013/03/24 -->
@@ -24,7 +25,8 @@
         <div class="shop_hd_topNav_all">
             <!-- Header TopNav Left -->
             <div class="shop_hd_topNav_all_left">
-                <p>您好，欢迎来到<b><a href="/">ShoopNC商城</a></b>[<a>登录</a>][<a>注册</a>]</p>
+                <p id="pid">
+                </p>
             </div>
             <!-- Header TopNav Left End -->
 
@@ -35,7 +37,7 @@
                     <li>
                         <div class="topNav_menu">
                             <a href="#" class="topNavHover">我的商城<i></i></a>
-                            <div class="topNav_menu_bd" style="display:none;" >
+                            <div class="topNav_menu_bd" style="display:none;">
                                 <ul>
                                     <li><a title="已买到的商品" target="_top" href="#">已买到的商品</a></li>
                                     <li><a title="个人主页" target="_top" href="#">个人主页</a></li>
@@ -100,7 +102,9 @@
 
     <!-- TopHeader Center -->
     <div class="shop_hd_header">
-        <div class="shop_hd_header_logo"><h1 class="logo"><a href="/"><img src="images/logo.png" alt="ShopCZ" /></a><span>ShopCZ</span></h1></div>
+        <div class="shop_hd_header_logo"><h1 class="logo"><a href="/"><img src="images/logo.png"
+                                                                           alt="ShopCZ"/></a><span>ShopCZ</span></h1>
+        </div>
         <div class="shop_hd_header_search">
             <ul class="shop_hd_header_search_tab">
                 <li id="search" class="current">商品</li>
@@ -108,10 +112,10 @@
             </ul>
             <div class="clear"></div>
             <div class="search_form">
-                <form method="post" action="http://localhost:8082/search/searchByKeyWord">
+                <form method="get" action="http://localhost:8082/search/searchByKeyWord">
                     <div class="search_formstyle">
-                        <input type="text" class="search_form_text" name="keyWord" =placeholder="在这里搜索" />
-                        <input type="submit" class="search_form_sub" name="secrch_submit" value="" title="搜索" />
+                        <input type="text" class="search_form_text" name="keyWord" placeholder="在这里搜索"/>
+                        <input type="submit" class="search_form_sub" value="" title="搜索"/>
                     </div>
                 </form>
             </div>
@@ -133,8 +137,10 @@
     <div class="shop_hd_menu">
         <!-- 所有商品菜单 -->
 
-        <div id="shop_hd_menu_all_category" class="shop_hd_menu_all_category"><!-- 首页去掉 id="shop_hd_menu_all_category" 加上clsss shop_hd_menu_hover -->
-            <div class="shop_hd_menu_all_category_title"><h2 title="所有商品分类"><a href="javascript:void(0);">所有商品分类</a></h2><i></i></div>
+        <div id="shop_hd_menu_all_category" class="shop_hd_menu_all_category">
+            <!-- 首页去掉 id="shop_hd_menu_all_category" 加上clsss shop_hd_menu_hover -->
+            <div class="shop_hd_menu_all_category_title"><h2 title="所有商品分类"><a href="javascript:void(0);">所有商品分类</a>
+            </h2><i></i></div>
             <div id="shop_hd_menu_all_category_hd" class="shop_hd_menu_all_category_hd">
                 <ul class="shop_hd_menu_all_category_hd_menu clearfix">
                     <!-- 单个菜单项 -->
@@ -537,7 +543,8 @@
 
                     <li class="clearfix">
                         <div class="goods_name"><a>Gap经典弹力纯色长袖T恤|000891347|原价149元</a></div>
-                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a><img src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg" /></a></div>
+                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a><img
+                                src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg"/></a></div>
                         <div class="goods_xiaoliang">
                             <span class="goods_xiaoliang_link"><a>去看看</a></span>
                             <span class="goods_xiaoliang_nums">已销售<strong>99</strong>笔</span>
@@ -546,7 +553,8 @@
 
                     <li class="clearfix">
                         <div class="goods_name"><a>Gap经典弹力纯色长袖T恤|000891347|原价149元</a></div>
-                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a><img src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg" /></a></div>
+                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a><img
+                                src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg"/></a></div>
                         <div class="goods_xiaoliang">
                             <span class="goods_xiaoliang_link"><a>去看看</a></span>
                             <span class="goods_xiaoliang_nums">已销售<strong>99</strong>笔</span>
@@ -555,7 +563,8 @@
 
                     <li class="clearfix">
                         <div class="goods_name"><a>Gap经典弹力纯色长袖T恤|000891347|原价149元</a></div>
-                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a><img src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg" /></a></div>
+                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a><img
+                                src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg"/></a></div>
                         <div class="goods_xiaoliang">
                             <span class="goods_xiaoliang_link"><a>去看看</a></span>
                             <span class="goods_xiaoliang_nums">已销售<strong>99</strong>笔</span>
@@ -576,7 +585,8 @@
 
                     <li class="clearfix">
                         <div class="goods_name"><a>Gap经典弹力纯色长袖T恤|000891347|原价149元</a></div>
-                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a><img src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg" /></a></div>
+                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a><img
+                                src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg"/></a></div>
                         <div class="goods_xiaoliang">
                             <span class="goods_xiaoliang_link"><a>去看看</a></span>
                             <span class="goods_xiaoliang_nums">已销售<strong>99</strong>笔</span>
@@ -585,7 +595,8 @@
 
                     <li class="clearfix">
                         <div class="goods_name"><a>Gap经典弹力纯色长袖T恤|000891347|原价149元</a></div>
-                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a><img src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg" /></a></div>
+                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a><img
+                                src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg"/></a></div>
                         <div class="goods_xiaoliang">
                             <span class="goods_xiaoliang_link"><a>去看看</a></span>
                             <span class="goods_xiaoliang_nums">已销售<strong>99</strong>笔</span>
@@ -594,7 +605,8 @@
 
                     <li class="clearfix">
                         <div class="goods_name"><a>Gap经典弹力纯色长袖T恤|000891347|原价149元</a></div>
-                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a><img src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg" /></a></div>
+                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a><img
+                                src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg"/></a></div>
                         <div class="goods_xiaoliang">
                             <span class="goods_xiaoliang_link"><a>去看看</a></span>
                             <span class="goods_xiaoliang_nums">已销售<strong>99</strong>笔</span>
@@ -679,19 +691,31 @@
         <div class="sort-bar">
             <div class="bar-l">
                 <!-- 查看方式S -->
-                <div class="switch"><span class="selected"><a title="以方格显示" ecvalue="squares" nc_type="display_mode" class="pm" href="javascript:void(0)">大图</a></span><span style="border-left:none;"><a title="以列表显示" ecvalue="list" nc_type="display_mode" class="lm" href="javascript:void(0)">列表</a></span></div>
+                <div class="switch"><span class="selected"><a title="以方格显示" ecvalue="squares" nc_type="display_mode"
+                                                              class="pm" href="javascript:void(0)">大图</a></span><span
+                        style="border-left:none;"><a title="以列表显示" ecvalue="list" nc_type="display_mode" class="lm"
+                                                     href="javascript:void(0)">列表</a></span></div>
                 <!-- 查看方式E -->
                 <!-- 排序方式S -->
                 <ul class="array">
-                    <li class="selected"><a title="默认排序" onclick="javascript:dropParam(['key','order'],'','array');" class="nobg" href="javascript:void(0)">默认</a></li>
-                    <li><a title="点击按销量从高到低排序" onclick="javascript:replaceParam(['key','order'],['sales','desc'],'array');" href="javascript:void(0)">销量</a></li>
-                    <li><a title="点击按人气从高到低排序" onclick="javascript:replaceParam(['key','order'],['click','desc'],'array');" href="javascript:void(0)">人气</a></li>
-                    <li><a title="点击按信用从高到低排序" onclick="javascript:replaceParam(['key','order'],['credit','desc'],'array');" href="javascript:void(0)">信用</a></li>
-                    <li><a title="点击按价格从高到低排序" onclick="javascript:replaceParam(['key','order'],['price','desc'],'array');" href="javascript:void(0)">价格</a></li>
+                    <li class="selected"><a title="默认排序" onclick="javascript:dropParam(['key','order'],'','array');"
+                                            class="nobg" href="javascript:void(0)">默认</a></li>
+                    <li><a title="点击按销量从高到低排序"
+                           onclick="javascript:replaceParam(['key','order'],['sales','desc'],'array');"
+                           href="javascript:void(0)">销量</a></li>
+                    <li><a title="点击按人气从高到低排序"
+                           onclick="javascript:replaceParam(['key','order'],['click','desc'],'array');"
+                           href="javascript:void(0)">人气</a></li>
+                    <li><a title="点击按信用从高到低排序"
+                           onclick="javascript:replaceParam(['key','order'],['credit','desc'],'array');"
+                           href="javascript:void(0)">信用</a></li>
+                    <li><a title="点击按价格从高到低排序"
+                           onclick="javascript:replaceParam(['key','order'],['price','desc'],'array');"
+                           href="javascript:void(0)">价格</a></li>
                 </ul>
                 <!-- 排序方式E -->
                 <!-- 价格段S -->
-                <div class="prices"> <em>¥</em>
+                <div class="prices"><em>¥</em>
                     <input type="text" value="" class="w30">
                     <em>-</em>
                     <input type="text" value="" class="w30">
@@ -708,10 +732,13 @@
             <ul>
                 <li th:each="good : ${page.list}">
                     <dl>
-                        <dt><a th:href="|http://localhost:8083/html/${good.id}.html|"><img th:src="|http://192.168.114.128/${#strings.listSplit(good.gimages,'|')[0]}|" src="images/21151da3bdefc6d9a7120c991fe59800.jpg_small.jpg" /></a></dt>
+                        <dt><a th:href="|http://localhost:8083/html/${good.id}.html|"><img
+                                th:src="|http://192.168.114.128/${#strings.listSplit(good.gimages,'|')[0]}|"
+                                src="images/21151da3bdefc6d9a7120c991fe59800.jpg_small.jpg"/></a></dt>
                         <dd class="title"><a th:utext="${good.gname}">OCIAIZO春装水洗做旧短外套复古磨白短款牛仔外套春01C1417</a></dd>
                         <dd class="content">
-                            <span class="goods_jiage" th:text="${#numbers.formatCurrency(good.gprice)}">￥<strong>249.00</strong></span>
+                            <span class="goods_jiage"
+                                  th:text="${#numbers.formatCurrency(good.gprice)}">￥<strong>249.00</strong></span>
                             <span class="goods_chengjiao">当前库存<a th:text="${good.gsave}">1</a>件</span>
                         </dd>
                     </dl>

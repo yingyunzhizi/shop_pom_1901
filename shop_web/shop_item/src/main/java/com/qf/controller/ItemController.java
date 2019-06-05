@@ -32,11 +32,12 @@ public class ItemController {
 
     /**
      * 在添加商品时候将指定的商品详情页面生成静态页面
+     *
      * @param gid
      * @return
      */
     @RequestMapping("/creatHtml")
-    public String creatHtml(Integer gid){
+    public String creatHtml(Integer gid) {
 
         //静态页面的输出路径:必须可以让外界访问到
         String sPath = ItemController.class.getResource("/static/html/").getPath() + gid + ".html";
@@ -48,11 +49,11 @@ public class ItemController {
             Goods goods = goodsService.getGoodsById(gid);
             String[] stringImages = goods.getGimages().split("\\|");
             Map map = new HashMap();
-            map.put("goods",goods);
-            map.put("stringImages",stringImages);
+            map.put("goods", goods);
+            map.put("stringImages", stringImages);
 
             //生成详情页
-            template.process(map,fileWriter);
+            template.process(map, fileWriter);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {

@@ -11,18 +11,18 @@
             //获得需要找回密码的用户名
             var username = $("#username").val();
 
-            if(username.trim() == ""){
+            if (username.trim() == "") {
                 alert("用户名不能为空！");
                 return;
             }
 
             //ajax通知后台给这个用户的邮箱发送邮件
-            $.post("/sso/sendForgetMail", {"username": username}, function(data){
-                if(data.code == -1){
+            $.post("/sso/sendForgetMail", {"username": username}, function (data) {
+                if (data.code == -1) {
                     alert("用户名不存在！");
-                } else if(data.code == -2){
+                } else if (data.code == -2) {
                     alert("邮件发送失败，请稍后再试！");
-                } else if(data.code == 0){
+                } else if (data.code == 0) {
                     //邮件发送成功！
                     $("#span_id").html("找回密码的邮件已经发送到您的" + data.strEmail + "邮箱，<a href='" + data.toEmail + "' target='_blank'>去邮箱</a>！");
                 }
@@ -31,8 +31,8 @@
     </script>
 </head>
 <body>
-    <h1>忘记密码</h1>
-    <input id="username" type="text" placeholder="请输入账号"/><span id="span_id" style="color: green"></span><br/>
-    <button onclick="getPassWord();" type="button">找回密码</button>
+<h1>忘记密码</h1>
+<input id="username" type="text" placeholder="请输入账号"/><span id="span_id" style="color: green"></span><br/>
+<button onclick="getPassWord();" type="button">找回密码</button>
 </body>
 </html>
